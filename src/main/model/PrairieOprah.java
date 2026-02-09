@@ -12,6 +12,10 @@ public class PrairieOprah {
         passcodes = new ArrayList<>();
         expired = new ArrayList<>();
     }
+    
+    public Entry oprah() {
+        return entries.get((int)(Math.random() * entries.size()));
+    }
 
     public boolean checkEntry(Entry e) {
         for (Passcode p : passcodes) {
