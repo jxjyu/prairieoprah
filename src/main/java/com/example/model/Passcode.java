@@ -1,4 +1,4 @@
-package model;
+package com.example.model;
 
 import java.time.LocalDateTime;
 
@@ -6,8 +6,8 @@ public class Passcode {
     private String password;
     private LocalDateTime creation, expiry;
 
-    public Passcode(int minutes) {
-        password = "test";
+    public Passcode(String password, int minutes) {
+        this.password = password;
         creation = LocalDateTime.now();
         expiry = LocalDateTime.now().plusMinutes(minutes);
     }
