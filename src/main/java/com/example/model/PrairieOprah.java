@@ -5,17 +5,18 @@ import com.example.exceptions.InvalidPasscodeException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
 public class PrairieOprah {
     private ArrayList<Entry> entries;
-    private ArrayList<Passcode> passcodes;
+    private LinkedList<Passcode> passcodes;
     private ArrayList<Passcode> expired;
 
     public PrairieOprah() {
         entries = new ArrayList<>();
-        passcodes = new ArrayList<>();
+        passcodes = new LinkedList<>();
         expired = new ArrayList<>();
     }
 
@@ -26,8 +27,6 @@ public class PrairieOprah {
         Entry current = new Entry(name, email, passcode);
         if (!checkEntry(current)) {
             throw new InvalidEntryException("");
-        } else {
-            entries.add(current);
         }
     }
 
@@ -46,15 +45,18 @@ public class PrairieOprah {
     }
 
     public boolean checkEntry(Entry e) {
-        for (Passcode p : passcodes) {
-            if (p.good(e)) {
-                p.use(e);
+        for (int i = passcodes.size() - 1; i >= 0; i--) {
+            Passcode current = passcodes.get(i);
+            if (current.good(e)) {
+                current.use(e);
                 entries.add(e);
                 return true;
             }
-            if (p.isExpired()) {
-                expired.add(p);
-                passcodes.remove(p);
+            if (current.isExpired()) {
+                if (current.hasEntries()) {
+                    expired.add(current);
+                    passcodes.remove(current);
+                }
             }
         }
         return false;
@@ -73,19 +75,5 @@ public class PrairieOprah {
             }
         }
         passcodes.add(current);
-    }
-
-    public String clean() {
-        String passcodes = "";
-        for (int i = expired.size(); i >= 0; i--) {
-            if (expired.get(i).isEmpty()) {
-                passcodes += expired.get(i).getPassword();
-                passcodes += ",";
-            }
-        }
-        if (!passcodes.isEmpty()) {
-            passcodes = passcodes.substring(0, passcodes.length() - 1);
-        }
-        return passcodes;
     }
 }

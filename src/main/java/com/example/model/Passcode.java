@@ -35,8 +35,8 @@ public class Passcode {
         return LocalDateTime.now().isAfter(expiry) || !(uses > 0 || uses == -1);
     }
 
-    public boolean isEmpty() {
-        return emails.isEmpty() && LocalDateTime.now().isAfter(expiry);
+    public boolean hasEntries() {
+        return !emails.isEmpty();
     }
 
     public LocalDateTime getCreationTime() {

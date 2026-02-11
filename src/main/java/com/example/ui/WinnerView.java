@@ -25,7 +25,7 @@ public class WinnerView extends VerticalLayout {
         PLFormCard winner = new PLFormCard("Overwatch 2 Game Room: Get Winner");
         createWinner();
         winner.addComponents(winnerName, winnerEmail, winnerTime, department);
-        winner.addButtons(winnerButton(), clean());
+        winner.addButtons(winnerButton());
         add(winner);
     }
 
@@ -65,15 +65,4 @@ public class WinnerView extends VerticalLayout {
         });
         return winnerButton;
     }
-
-    private PLButton clean() {
-        PLButton cleanButton = new PLButton("Clean");
-        cleanButton.addClickListener(e -> {
-            Notification.show(prairieOprah.clean());
-        });
-        cleanButton.setAltColor();
-        return cleanButton;
-    }
-
-
 }
