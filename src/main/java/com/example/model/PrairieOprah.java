@@ -1,7 +1,8 @@
 package com.example.model;
 
 import com.example.exceptions.InvalidEntryException;
-import com.example.exceptions.InvalidPasscodeException;import org.springframework.stereotype.Service;
+import com.example.exceptions.InvalidPasscodeException;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,8 @@ public class PrairieOprah {
 
     public boolean checkEntry(Entry e) {
         for (Passcode p : passcodes) {
-            if (p.good(e.getPasscode())) {
+            if (p.good(e)) {
+                p.use(e);
                 entries.add(e);
                 return true;
             }
@@ -58,13 +60,32 @@ public class PrairieOprah {
         return false;
     }
 
-    public void addPasscode(String passcode, int minutes) {
-        Passcode current = new Passcode(passcode, minutes);
+    public void addPasscode(String passcode, int minutes, int uses, String department) {
+        Passcode current = new Passcode(passcode, minutes, uses, department);
         for (Passcode p : passcodes) {
             if (p.equals(current)) {
-                throw new InvalidPasscodeException("");
+                throw new InvalidPasscodeException("Your passcode is already in use!");
+            }
+        }
+        for (Passcode p : expired) {
+            if (p.equals(current)) {
+                throw new InvalidPasscodeException("Your password can't be the same as an expired passcode!");
             }
         }
         passcodes.add(current);
+    }
+
+    public String clean() {
+        String passcodes = "";
+        for (int i = expired.size(); i >= 0; i--) {
+            if (expired.get(i).isEmpty()) {
+                passcodes += expired.get(i).getPassword();
+                passcodes += ",";
+            }
+        }
+        if (!passcodes.isEmpty()) {
+            passcodes = passcodes.substring(0, passcodes.length() - 1);
+        }
+        return passcodes;
     }
 }
