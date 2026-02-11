@@ -3,6 +3,7 @@ package com.example.ui;
 import com.example.exceptions.InvalidPasscodeException;
 import com.example.model.PrairieOprah;
 import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
@@ -68,6 +69,13 @@ public class GeneratorView extends VerticalLayout {
                 try {
                     prairieOprah.addPasscode(passcode, length, uses, department);
                     Notification.show(passcode + " has been saved as a passcode for " + length + " minutes.");
+                    UI.getCurrent().getPage().executeJs(
+                            "navigator.clipboard.writeText($0).then(function() {" +
+                                    "  console.log('Copying to clipboard was successful!');" +
+                                    "}).catch(function(err) {" +
+                                    "  console.error('Could not copy text: ', err);" +
+                                    "});",
+                            passcode);
                 } catch (InvalidPasscodeException error) {
                     Notification.show(error.getMessage());
                 }
@@ -89,6 +97,13 @@ public class GeneratorView extends VerticalLayout {
                     prairieOprah.addPasscode(passcode, 3, 1, department);
                     passcodeField.setValue(passcode);
                     Notification.show("Your single-use passcode is: " + passcode);
+                    UI.getCurrent().getPage().executeJs(
+                            "navigator.clipboard.writeText($0).then(function() {" +
+                                    "  console.log('Copying to clipboard was successful!');" +
+                                    "}).catch(function(err) {" +
+                                    "  console.error('Could not copy text: ', err);" +
+                                    "});",
+                            passcode);
                 } catch (InvalidPasscodeException error) {
                     Notification.show("Try again!");
                 }
