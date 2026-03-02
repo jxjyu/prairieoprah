@@ -1,7 +1,7 @@
-package com.example.model;
+package ca.xjyu.pls.model;
 
-import com.example.exceptions.InvalidEntryException;
-import com.example.exceptions.InvalidPasscodeException;
+import ca.xjyu.pls.exceptions.InvalidEntryException;
+import ca.xjyu.pls.exceptions.InvalidPasscodeException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,20 +44,24 @@ public class PrairieOprah {
         return entries;
     }
 
+    public List<Passcode> getCurrentPasscodes() {
+        return passcodes;
+    }
+
+    public List<Passcode> getExpiredPasscodes() {
+        return expired;
+    }
+
     public boolean checkEntry(Entry e) {
         for (int i = passcodes.size() - 1; i >= 0; i--) {
             Passcode current = passcodes.get(i);
             if (current.good(e)) {
                 current.use(e);
                 entries.add(e);
+                checkRemove(current);
                 return true;
             }
-            if (current.isExpired()) {
-                if (current.hasEntries()) {
-                    expired.add(current);
-                    passcodes.remove(current);
-                }
-            }
+            checkRemove(current);
         }
         return false;
     }
@@ -74,6 +78,37 @@ public class PrairieOprah {
                 throw new InvalidPasscodeException("Your password can't be the same as an expired passcode!");
             }
         }
-        passcodes.add(current);
+        passcodes.addFirst(current);
+    }
+
+    public String mapDepartment(Entry e) {
+        if (!entries.contains(e)) {
+            return null;
+        }
+        for (Passcode p : passcodes) {
+            if (p.hasEntry(e)) {
+                return p.getDepartment();
+            }
+        }
+        for (Passcode p : expired) {
+            if (p.hasEntry(e)) {
+                return p.getDepartment();
+            }
+        }
+        return null;
+    }
+
+    public boolean checkRemove(Passcode current) {
+        if (current.isExpired()) {
+            if (current.hasEntries()) {
+                expired.add(current);
+                passcodes.remove(current);
+            } else {
+                passcodes.remove(current);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }

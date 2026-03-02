@@ -1,14 +1,12 @@
-package com.example.ui;
+package ca.xjyu.pls.ui;
 
-import com.example.model.Entry;
-import com.example.model.PrairieOprah;
+import ca.xjyu.pls.model.Entry;
+import ca.xjyu.pls.model.PrairieOprah;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
-
-import java.time.format.DateTimeFormatter;
 
 @Route("winner")
 public class WinnerView extends VerticalLayout {
@@ -56,9 +54,8 @@ public class WinnerView extends VerticalLayout {
             if (winner != null) {
                 winnerName.setValue(winner.getUser());
                 winnerEmail.setValue(winner.getEmail());
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm:ss");
-                winnerTime.setValue(winner.getDateTime().format(formatter));
-                department.setValue(winner.getDepartment());
+                winnerTime.setValue(winner.getDateTimeString());
+                department.setValue(prairieOprah.mapDepartment(winner));
             } else {
                 Notification.show("No entries yet!");
             }

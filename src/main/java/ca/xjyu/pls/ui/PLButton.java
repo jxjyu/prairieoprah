@@ -1,4 +1,4 @@
-package com.example.ui;
+package ca.xjyu.pls.ui;
 
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.button.Button;

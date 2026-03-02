@@ -1,4 +1,4 @@
-package com.example.ui;
+package ca.xjyu.pls.ui;
 
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.html.H1;
@@ -6,13 +6,24 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Layout;
 import com.vaadin.flow.router.RouterLink;
 
+/**
+ * Main menu and layout for all pages. The top bar is hardcoded in.
+ *
+ * @author Jeff Yu
+ * @version 0.1
+ */
 @Layout
 public final class MainLayout extends AppLayout {
 
+    private final String TITLE = "UBCEA Test";
+
+    /**
+     * Creates the main layout of the website.
+     */
     MainLayout() {
         HorizontalLayout header = new HorizontalLayout();
 
-        H1 logoText = new H1("PLStake UBCEA Test");
+        H1 logoText = new H1(TITLE);
         logoText.getStyle()
                 .set("font-size", "1.125rem")
                 .set("margin", "0")
@@ -23,6 +34,9 @@ public final class MainLayout extends AppLayout {
         logoLink.add(logoText);
         header.add(logoLink);
 
+        /*
+        EDIT HERE FOR TOP NAV BAR LINKS:
+         */
         RouterLink generatorLink = new RouterLink("Generate Passcode", GeneratorView.class);
         RouterLink winnerLink = new RouterLink("Get Winner", WinnerView.class);
         styleNav(generatorLink);
@@ -36,6 +50,11 @@ public final class MainLayout extends AppLayout {
         addToNavbar(header);
     }
 
+    /**
+     * Modifies a {@code RouterLink} into the correct styling for the top navbar.
+     *
+     * @param link  the link to be modified
+     */
     private void styleNav(RouterLink link) {
         link.getStyle()
                 .set("color", "#9B9D9E")

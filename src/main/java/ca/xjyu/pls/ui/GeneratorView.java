@@ -1,7 +1,7 @@
-package com.example.ui;
+package ca.xjyu.pls.ui;
 
-import com.example.exceptions.InvalidPasscodeException;
-import com.example.model.PrairieOprah;
+import ca.xjyu.pls.exceptions.InvalidPasscodeException;
+import ca.xjyu.pls.model.PrairieOprah;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.notification.Notification;

@@ -1,4 +1,4 @@
-package com.example.ui;
+package ca.xjyu.pls.ui;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.html.Span;
@@ -21,6 +21,7 @@ public class PLFormCard extends VerticalLayout {
         this.getStyle().set("background-color", "white");
         this.getStyle().set("overflow", "hidden");
         this.add(addTop(titleText), addCardCentre(), addBottom());
+        this.setFlexGrow(1, formCardCentre);
     }
 
     public void addComponents(Component... components) {

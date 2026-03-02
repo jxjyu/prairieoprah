@@ -1,6 +1,7 @@
-package com.example.model;
+package ca.xjyu.pls.model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Passcode {
@@ -19,16 +20,19 @@ public class Passcode {
     }
 
     public boolean good(Entry e) {
-        return e.getPasscode().equals(this.password) && !this.isExpired() &&
-                !emails.contains(e.getEmail());
+        return e.getPassword().equals(this.password) && !this.isExpired() &&
+                !hasEntry(e);
     }
 
     public void use(Entry e) {
         if (uses > 0) {
             uses--;
         }
-        e.setDepartment(this.getDepartment());
         emails.add(e.getEmail());
+    }
+
+    public boolean hasEntry(Entry e) {
+        return emails.contains(e.getEmail());
     }
 
     public boolean isExpired() {
@@ -42,9 +46,17 @@ public class Passcode {
     public LocalDateTime getCreationTime() {
         return this.creation;
     }
+
+    public String getCreationTimeString() {
+        return this.creation.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm:ss"));
+    }
     
     public LocalDateTime getExpiryTime() {
         return this.expiry;
+    }
+
+    public String getExpiryTimeString() {
+        return this.expiry.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm:ss"));
     }
 
     public String getDepartment() {
@@ -54,6 +66,15 @@ public class Passcode {
     public String getPassword() {
         return this.password;
     }
+
+    public int getUses() {
+        return this.emails.size();
+    }
+
+    public int getRemainingUses() {
+        return this.uses;
+    }
+
 
     @Override
     public int hashCode() {
@@ -66,7 +87,7 @@ public class Passcode {
         if (!(other instanceof Passcode)) {
             return false;
         }
-        Passcode toCompare = (Passcode)other;
+        Passcode toCompare = (Passcode) other;
         if (toCompare.getPassword().equals(this.password)) {
             return true;
         } else {
