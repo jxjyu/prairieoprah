@@ -1,3 +1,7 @@
+import { injectGlobalCss } from 'Frontend/generated/jar-resources/theme-util.js';
+
+import { css, unsafeCSS, registerStyles } from '@vaadin/vaadin-themable-mixin';
+import $cssFromFile_0 from 'Frontend/styles/navbar-responsive.css?inline';
 import '@vaadin/vertical-layout/src/vaadin-vertical-layout.js';
 import '@vaadin/text-field/src/vaadin-text-field.js';
 import '@vaadin/tooltip/src/vaadin-tooltip.js';
@@ -9,9 +13,23 @@ import '@vaadin/notification/src/vaadin-notification.js';
 import 'Frontend/generated/jar-resources/flow-component-renderer.js';
 import 'Frontend/generated/jar-resources/flow-component-directive.js';
 import '@vaadin/app-layout/src/vaadin-app-layout.js';
+import '@vaadin/app-layout/src/vaadin-drawer-toggle.js';
 import '@vaadin/integer-field/src/vaadin-integer-field.js';
+import '@vaadin/grid/src/vaadin-grid.js';
+import '@vaadin/grid/src/vaadin-grid-column.js';
+import '@vaadin/grid/src/vaadin-grid-sorter.js';
+import '@vaadin/checkbox/src/vaadin-checkbox.js';
+import 'Frontend/generated/jar-resources/gridConnector.ts';
+import 'Frontend/generated/jar-resources/vaadin-grid-flow-selection-column.js';
+import '@vaadin/grid/src/vaadin-grid-column-group.js';
+import 'Frontend/generated/jar-resources/lit-renderer.ts';
+import '@vaadin/context-menu/src/vaadin-context-menu.js';
+import 'Frontend/generated/jar-resources/contextMenuConnector.js';
+import 'Frontend/generated/jar-resources/contextMenuTargetConnector.js';
 import '@vaadin/common-frontend/ConnectionIndicator.js';
 import 'Frontend/generated/jar-resources/ReactRouterOutletElement.tsx';
+
+injectGlobalCss($cssFromFile_0.toString(), 'CSSImport end', document);
 
 const loadOnDemand = (key) => {
   const pending = [];
@@ -21,11 +39,11 @@ const loadOnDemand = (key) => {
   if (key === 'f7d69b7bb19a9ddbbc669297e97d3f5b5919087cf3e2854cae6573ad57f1f04b') {
     pending.push(import('./chunks/chunk-d84738c46c57c24b876372bd8682eb760566e2707f50673ccc7a25b0bff0443e.js'));
   }
-  if (key === '0f0c75be6205121c8f8eefe672502c7b37e35df3f2f05f08b2177803da249d33') {
-    pending.push(import('./chunks/chunk-d3c723a67d25800bbafff45f540ad6722053abdec72430749d2d4eaa51707e59.js'));
-  }
   if (key === 'e7da681cefbfd838f6c3e6d1310df4d9468179fdc3e982dc07b361e984021a42') {
     pending.push(import('./chunks/chunk-cf79a3df4b603f3ed19b2f775884e0ddef317f206ff2c56331559d06265ef4c1.js'));
+  }
+  if (key === '0f0c75be6205121c8f8eefe672502c7b37e35df3f2f05f08b2177803da249d33') {
+    pending.push(import('./chunks/chunk-d3c723a67d25800bbafff45f540ad6722053abdec72430749d2d4eaa51707e59.js'));
   }
   return Promise.all(pending);
 }

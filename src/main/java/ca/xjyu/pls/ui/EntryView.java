@@ -7,13 +7,29 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.PermitAll;
 
+/**
+ * Provides a tabular overview of all successful raffle entries.
+ * <p>
+ * This view is restricted to authenticated users and displays detailed information
+ * for each entry, including user identity, timing, and department mapping.
+ *
+ * @author Jeff Yu
+ * @version 0.3
+ */
 @Route("entries")
+@PermitAll
 public class EntryView extends VerticalLayout {
 
     private final PrairieOprah prairieOprah;
     private Grid<Entry> entryGrid;
 
+    /**
+     * Initialises the entry view and populates the data grid.
+     *
+     * @param prairieOprah The backend service providing entry data.
+     */
     public EntryView(PrairieOprah prairieOprah) {
         this.prairieOprah = prairieOprah;
         setSizeFull();
@@ -26,6 +42,11 @@ public class EntryView extends VerticalLayout {
         add(winner);
     }
 
+    /**
+     * Creates a refresh button to update the grid data manually.
+     *
+     * @return A {@link PLButton} that triggers a data refresh.
+     */
     private PLButton refreshButton() {
         PLButton refreshButton = new PLButton("Refresh");
         refreshButton.addClickShortcut(Key.ENTER);
@@ -36,6 +57,9 @@ public class EntryView extends VerticalLayout {
         return refreshButton;
     }
 
+    /**
+     * Configures the grid columns and column headers.
+     */
     private void createGrid() {
         entryGrid = new Grid<>();
         entryGrid.addColumn(Entry::getUser).setHeader("User");
@@ -47,6 +71,9 @@ public class EntryView extends VerticalLayout {
         setData();
     }
 
+    /**
+     * Fetches the latest entries from the service and updates the grid items.
+     */
     private void setData() {
         entryGrid.setItems(prairieOprah.getEntries());
     }

@@ -5,11 +5,29 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
+/**
+ * A composite component that renders a titled card, imitating PrairieLearn/Bootstrap.
+ * <p>
+ * The card is styled with:
+ * <ul>
+ *      <li>A blue header bar containing the card title.
+ *      <li>A central body area for form inputs or grids.
+ *      <li>A grey footer bar dedicated to action buttons.
+ * </ul>
+ *
+ * @author Jeff Yu
+ * @version 0.3
+ */
 public class PLFormCard extends VerticalLayout {
 
     private HorizontalLayout top, bottom;
     private VerticalLayout formCardCentre;
 
+    /**
+     * Initialises a new form card with a specific header title.
+     *
+     * @param titleText     The title to be displayed in the blue header bar.
+     */
     public PLFormCard(String titleText) {
         super();
         this.setWidth("100%");
@@ -24,18 +42,34 @@ public class PLFormCard extends VerticalLayout {
         this.setFlexGrow(1, formCardCentre);
     }
 
+    /**
+     * Adds one or more components (such as TextFields or Grids) to the centre body of the card.
+     *
+     * @param components    The components to be added to the main form area.
+     */
     public void addComponents(Component... components) {
         for (Component current : components) {
             formCardCentre.add(current);
         }
     }
 
+    /**
+     * Adds buttons to the card's footer area.
+     *
+     * @param buttons   The {@link PLButton} instances to be placed in the bottom action bar.
+     */
     public void addButtons(PLButton... buttons) {
         for (PLButton current : buttons) {
             bottom.add(current);
         }
     }
 
+    /**
+     * Internal helper to construct and style the header bar.
+     *
+     * @param titleText     The text to display in the header.
+     * @return  A styled {@link HorizontalLayout} representing the header.
+     */
     private HorizontalLayout addTop(String titleText) {
         HorizontalLayout topBar = new HorizontalLayout();
         topBar.setWidthFull();
@@ -51,6 +85,12 @@ public class PLFormCard extends VerticalLayout {
         return topBar;
     }
 
+    /**
+     * Internal helper to initialise the central content area.
+     *
+     * @param components    Optional initial components.
+     * @return  A {@link VerticalLayout} representing the card body.
+     */
     private VerticalLayout addCardCentre(Component... components) {
         VerticalLayout textfields = new VerticalLayout();
         textfields.setWidthFull();
@@ -62,6 +102,12 @@ public class PLFormCard extends VerticalLayout {
         return textfields;
     }
 
+    /**
+     * Internal helper to construct and style the footer action bar.
+     *
+     * @param buttons   Optional initial buttons.
+     * @return  A styled {@link HorizontalLayout} representing the footer.
+     */
     private HorizontalLayout addBottom(PLButton... buttons) {
         HorizontalLayout bottomBar = new HorizontalLayout();
         bottomBar.setWidthFull();

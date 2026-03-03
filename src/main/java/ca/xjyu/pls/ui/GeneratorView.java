@@ -9,14 +9,30 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.PermitAll;
 
+/**
+ * Administrative interface for generating and configuring passcodes.
+ * <p>
+ * Supports the creation of standard multi-use passcodes with custom expiry
+ * durations and the generation of randomised single-use passcodes.
+ *
+ * @author Jeff Yu
+ * @version 0.3
+ */
 @Route("generate")
+@PermitAll
 public class GeneratorView extends VerticalLayout {
 
     private final PrairieOprah prairieOprah;
     private TextField passcodeField, departmentField;
     private IntegerField timeField, maxUses;
 
+    /**
+     * Constructs the GeneratorView and organises the input fields.
+     *
+     * @param prairieOprah The backend service for passcode registration.
+     */
     public GeneratorView(PrairieOprah prairieOprah) {
         this.prairieOprah = prairieOprah;
 
@@ -32,6 +48,9 @@ public class GeneratorView extends VerticalLayout {
         add(normalPasscode);
     }
 
+    /**
+     * Initialises the input fields for passcode properties.
+     */
     private void createNormalFields() {
         passcodeField = new TextField("Passcode");
         passcodeField.setWidthFull();
@@ -53,6 +72,13 @@ public class GeneratorView extends VerticalLayout {
         departmentField.setClearButtonVisible(true);
     }
 
+    /**
+     * Creates a button to save a custom passcode.
+     * <p>
+     * Also includes JavaScript to copy the saved passcode to the system clipboard.
+     *
+     * @return A {@link PLButton} for standard passcode creation.
+     */
     private PLButton createNormalButton() {
         PLButton enterButton = new PLButton("Save Passcode");
         enterButton.addClickShortcut(Key.ENTER);
@@ -84,6 +110,11 @@ public class GeneratorView extends VerticalLayout {
         return enterButton;
     }
 
+    /**
+     * Creates a button to generate a random single-use passcode.
+     *
+     * @return A {@link PLButton} for one-time passcode generation.
+     */
     private PLButton createSingleUseButton() {
         PLButton enterButton = new PLButton("Single-use Passcode");
         enterButton.setAltColor();

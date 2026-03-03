@@ -7,13 +7,28 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.PermitAll;
 
+/**
+ * An administrative view designed to randomly select and display a winner.
+ * <p>
+ * This view requires authentication and displays the winner's contact
+ * details, submission time, and associated department.
+ *
+ * @author Jeff Yu
+ * @version 0.3
+ */
 @Route("winner")
+@PermitAll
 public class WinnerView extends VerticalLayout {
-
     private final PrairieOprah prairieOprah;
     private TextField winnerName, winnerEmail, winnerTime, department;
 
+    /**
+     * Constructs the WinnerView and sets up the read-only display fields.
+     *
+     * @param prairieOprah The backend service used to select a random entry.
+     */
     public WinnerView(PrairieOprah prairieOprah) {
         this.prairieOprah = prairieOprah;
         setSizeFull();
@@ -27,6 +42,9 @@ public class WinnerView extends VerticalLayout {
         add(winner);
     }
 
+    /**
+     * Initialises the read-only fields used to display winner information.
+     */
     private void createWinner() {
         winnerName = new TextField("Winner Name");
         winnerName.setWidthFull();
@@ -46,6 +64,11 @@ public class WinnerView extends VerticalLayout {
         department.setReadOnly(true);
     }
 
+    /**
+     * Creates the button that triggers the random selection logic.
+     *
+     * @return A {@link PLButton} configured to fetch and display a winner.
+     */
     private PLButton winnerButton() {
         PLButton winnerButton = new PLButton("Get Winner");
         winnerButton.addClickShortcut(Key.ENTER);

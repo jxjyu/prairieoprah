@@ -8,14 +8,30 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
+/**
+ * The default landing page allowing users to submit an entry into the raffle.
+ * <p>
+ * This view is accessible to all users without authentication. It provides
+ * fields for name, email, and a passcode to validate the submission.
+ *
+ * @author Jeff Yu
+ * @version 0.3
+ */
 @Route("")
+@AnonymousAllowed
 public class RaffleView extends VerticalLayout {
 
     private final PrairieOprah prairieOprah;
     private TextField nameField, passcodeField;
     private EmailField emailField;
 
+    /**
+     * Constructs the RaffleView and initialises the form components.
+     *
+     * @param prairieOprah The backend service used to process entries.
+     */
     public RaffleView(PrairieOprah prairieOprah) {
         this.prairieOprah = prairieOprah;
 
@@ -31,6 +47,11 @@ public class RaffleView extends VerticalLayout {
         add(enter);
     }
 
+    /**
+     * Creates and configures the submission button.
+     *
+     * @return A {@link PLButton} configured for entry submission.
+     */
     private PLButton createButton() {
         PLButton enterButton = new PLButton("Save & Enter");
         enterButton.addClickShortcut(Key.ENTER);
@@ -55,6 +76,9 @@ public class RaffleView extends VerticalLayout {
         return enterButton;
     }
 
+    /**
+     * Initialises the input fields for the user's name, email, and passcode.
+     */
     private void createTextFields() {
         nameField = new TextField("Name");
         nameField.setWidthFull();
