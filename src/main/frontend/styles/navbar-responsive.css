@@ -1,0 +1,24 @@
+/* Mobile View (Up to 768px) */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-toggle {
+    display: block !important;
+  }
+}
+
+/* Desktop View (769px and above) */
+@media (min-width: 769px) {
+  .desktop-nav {
+    display: flex !important;
+  }
+  .mobile-toggle {
+    display: none !important;
+  }
+  
+  /* Hides the side drawer completely on desktop */
+  vaadin-app-layout::part(drawer) {
+    display: none !important;
+  }
+}
