@@ -4,7 +4,7 @@
     <!-- Project from https://start.vaadin.com/6fa139a8-1ed2-4c43-9d3e-e248f2dc308a -->
     <groupId>ca.jxjyu</groupId>
     <artifactId>app</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <properties>
