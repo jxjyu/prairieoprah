@@ -44,7 +44,7 @@ public class PasscodesView extends VerticalLayout {
      * @return A {@link PLFormCard} containing the active passcode grid.
      */
     private PLFormCard current() {
-        PLFormCard current = new PLFormCard("Overwatch 2 Game Room: View Current Passcodes");
+        PLFormCard current = new PLFormCard("View Current Passcodes");
         current.setHeight("500px");
         current.addComponents(currentGrid);
         PLButton refreshButton = new PLButton("Refresh");
@@ -63,7 +63,7 @@ public class PasscodesView extends VerticalLayout {
      * @return A {@link PLFormCard} containing the expired passcode grid.
      */
     private PLFormCard expired() {
-        PLFormCard expired = new PLFormCard("Overwatch 2 Game Room: View Expired Passcodes");
+        PLFormCard expired = new PLFormCard("View Expired Passcodes");
         expired.setHeight("500px");
         expired.addComponents(expiredGrid);
         PLButton refreshButton = new PLButton("Refresh");
@@ -97,7 +97,7 @@ public class PasscodesView extends VerticalLayout {
         Grid<Passcode> grid = new Grid<>();
         grid.setHeight("300px");
         grid.addColumn(Passcode::getPassword).setHeader("Password");
-        grid.addColumn(Passcode::getDepartment).setHeader("Department");
+        grid.addColumn(Passcode::getDepartment).setHeader("Exec");
         grid.addColumn(Passcode::getCreationTimeString).setHeader("Creation");
         grid.addColumn(Passcode::getExpiryTimeString).setHeader("Expiry");
         grid.addColumn(Passcode::getUses).setHeader("Uses");

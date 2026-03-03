@@ -40,7 +40,7 @@ public class GeneratorView extends VerticalLayout {
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.START);
 
-        PLFormCard normalPasscode = new PLFormCard("Overwatch 2 Game Room: Passcode Generator");
+        PLFormCard normalPasscode = new PLFormCard("Passcode Generator");
         createNormalFields();
         normalPasscode.addComponents(passcodeField, timeField, departmentField, maxUses);
         normalPasscode.addButtons(createNormalButton(), createSingleUseButton());
@@ -67,7 +67,7 @@ public class GeneratorView extends VerticalLayout {
         maxUses.setMin(-1);
         maxUses.setMax(25);
         maxUses.setMaxWidth("200px");
-        departmentField = new TextField("Department");
+        departmentField = new TextField("Exec Name");
         departmentField.setWidthFull();
         departmentField.setClearButtonVisible(true);
     }
@@ -122,7 +122,7 @@ public class GeneratorView extends VerticalLayout {
             String passcode = Integer.toString((int)(Math.random() * 999999999 + 1));
             String department = departmentField.getValue();
             if (department == null || department.trim().isEmpty()) {
-                Notification.show("Please enter your department.");
+                Notification.show("Please enter the exec's name.");
             } else {
                 try {
                     prairieOprah.addPasscode(passcode, 3, 1, department);

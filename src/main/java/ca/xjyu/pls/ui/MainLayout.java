@@ -170,7 +170,7 @@ public final class MainLayout extends AppLayout {
      * @return an {@code Anchor} pointing to the OAuth2 authorisation endpoint
      */
     private Anchor getLoginButton() {
-        Anchor loginLink = new Anchor("/oauth2/authorization/auth0", "Log in");
+        Anchor loginLink = new Anchor("/oauth2/authorization/auth0", "Staff login");
         loginLink.setRouterIgnore(true);
         loginLink.getStyle()
                 .set("margin-left", "auto")

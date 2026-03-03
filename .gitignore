@@ -1,4 +1,5 @@
 *.class
-/target
-/.idea
-/.vscode
+target/
+.idea/
+.vscode/
+src/main/frontend/generated/

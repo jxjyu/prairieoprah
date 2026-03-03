@@ -39,7 +39,7 @@ public class RaffleView extends VerticalLayout {
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.START);
 
-        PLFormCard enter = new PLFormCard("Overwatch 2 Game Room");
+        PLFormCard enter = new PLFormCard("UBCOW Raffle Entry Tool");
         createTextFields();
         enter.addComponents(nameField,emailField,passcodeField);
         enter.addButtons(createButton());

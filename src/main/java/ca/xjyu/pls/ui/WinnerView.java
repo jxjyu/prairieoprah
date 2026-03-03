@@ -35,7 +35,7 @@ public class WinnerView extends VerticalLayout {
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.START);
 
-        PLFormCard winner = new PLFormCard("Overwatch 2 Game Room: Get Winner");
+        PLFormCard winner = new PLFormCard("Get Winner");
         createWinner();
         winner.addComponents(winnerName, winnerEmail, winnerTime, department);
         winner.addButtons(winnerButton());
@@ -58,7 +58,7 @@ public class WinnerView extends VerticalLayout {
         winnerTime.setWidthFull();
         winnerTime.setClearButtonVisible(true);
         winnerTime.setReadOnly(true);
-        department = new TextField("Department");
+        department = new TextField("Exec");
         department.setWidthFull();
         department.setClearButtonVisible(true);
         department.setReadOnly(true);
