@@ -36,7 +36,7 @@ public class EntryView extends VerticalLayout {
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.START);
         createGrid();
-        PLFormCard winner = new PLFormCard("Overwatch 2 Game Room: View Data");
+        PLFormCard winner = new PLFormCard("View Entries");
         winner.addComponents(entryGrid);
         winner.addButtons(refreshButton());
         add(winner);
@@ -66,7 +66,7 @@ public class EntryView extends VerticalLayout {
         entryGrid.addColumn(Entry::getEmail).setHeader("Email");
         entryGrid.addColumn(Entry::getDateTimeString).setHeader("Time");
         entryGrid.addColumn(Entry::getPassword).setHeader("Password");
-        entryGrid.addColumn(e -> prairieOprah.mapDepartment(e)).setHeader("Department");
+        entryGrid.addColumn(e -> prairieOprah.mapDepartment(e)).setHeader("Exec");
         entryGrid.setEmptyStateText("No entries found.");
         setData();
     }
