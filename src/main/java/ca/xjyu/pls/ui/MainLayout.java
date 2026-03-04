@@ -26,7 +26,8 @@ import com.vaadin.flow.spring.security.AuthenticationContext;
 public final class MainLayout extends AppLayout {
 
     /** The display title shown in the header. */
-    private final String TITLE = "UBCOW Gaming Expo";
+    private String title;
+    private String loginText;
 
     /**
      * Initialises the main layout, including the header, navigation links, and
@@ -37,7 +38,10 @@ public final class MainLayout extends AppLayout {
     MainLayout(AuthenticationContext authContext) {
         HorizontalLayout header = new HorizontalLayout();
 
-        H1 logoText = new H1(TITLE);
+        title = "UBCOW Gaming Expo";
+        loginText = "Staff login";
+
+        H1 logoText = new H1(title);
         logoText.getStyle()
                 .set("font-size", "1.125rem")
                 .set("margin", "0")
@@ -170,7 +174,7 @@ public final class MainLayout extends AppLayout {
      * @return an {@code Anchor} pointing to the OAuth2 authorisation endpoint
      */
     private Anchor getLoginButton() {
-        Anchor loginLink = new Anchor("/oauth2/authorization/auth0", "Staff login");
+        Anchor loginLink = new Anchor("/oauth2/authorization/auth0", loginText);
         loginLink.setRouterIgnore(true);
         loginLink.getStyle()
                 .set("margin-left", "auto")
