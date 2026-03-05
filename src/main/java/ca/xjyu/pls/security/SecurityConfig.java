@@ -41,7 +41,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain
             (HttpSecurity http, ClientRegistrationRepository clientRegistrationRepository) throws Exception {
-        // Configure Auth0 log-out handler
         OidcClientInitiatedLogoutSuccessHandler logoutSuccessHandler =
                 new OidcClientInitiatedLogoutSuccessHandler(clientRegistrationRepository);
         logoutSuccessHandler.setPostLogoutRedirectUri("https://ow.ubcea-lounge.ca/");

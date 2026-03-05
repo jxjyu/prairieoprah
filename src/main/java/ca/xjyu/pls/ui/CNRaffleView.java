@@ -11,7 +11,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 /**
- * The default landing page allowing users to submit an entry into the raffle.
+ * The landing page in Chinese (ZH-TW) allowing users to submit an entry into the raffle.
  * <p>
  * This view is accessible to all users without authentication. It provides
  * fields for name, email, and a passcode to validate the submission.
@@ -69,7 +69,7 @@ public class CNRaffleView extends VerticalLayout {
                     Notification.show("檔案以輸入存儲，貴名： " + name);
                     passcodeField.clear();
                 } catch (InvalidEntryException error) {
-                    Notification.show("您的密碼無效或失效！");
+                    Notification.show("您的密碼出現無效或失效狀態！");
                 }
             }
         });

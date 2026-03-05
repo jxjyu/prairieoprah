@@ -71,7 +71,7 @@ public class PrairieOprah {
                 System.err.println("Failed to load application state: " + e.getMessage());
             }
         } else {
-            safeToSave = true; // No file exists yet, so it is safe to create one
+            safeToSave = true;
         }
     }
 
