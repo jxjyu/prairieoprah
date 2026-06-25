@@ -18,7 +18,7 @@ import com.vaadin.flow.spring.security.AuthenticationContext;
  * Main menu and layout for all pages. The top bar is hardcoded in.
  *
  * @author Jeff Yu
- * @version 0.3
+ * @version 0.4
  */
 @Layout
 @AnonymousAllowed
@@ -68,8 +68,9 @@ public final class MainLayout extends AppLayout {
             RouterLink winnerLink = new RouterLink("Draw", WinnerView.class);
             RouterLink entryLink = new RouterLink("Entries", EntryView.class);
             RouterLink passcodeLink = new RouterLink("Passcodes", PasscodesView.class);
-            styleNav(generatorLink, winnerLink, entryLink, passcodeLink);
-            desktopNav.add(generatorLink, winnerLink, entryLink, passcodeLink, getLogoutButton(authContext));
+            RouterLink manualLink = new RouterLink("Manual Entry", ManualEntryView.class);
+            styleNav(generatorLink, winnerLink, entryLink, passcodeLink, manualLink);
+            desktopNav.add(generatorLink, winnerLink, entryLink, passcodeLink, manualLink, getLogoutButton(authContext));
             desktopNav.getStyle().set("flex-grow", "1");
 
             // Mobile Links (Drawer)
@@ -77,8 +78,9 @@ public final class MainLayout extends AppLayout {
             RouterLink drawerWinner = new RouterLink("Draw", WinnerView.class);
             RouterLink drawerEntry = new RouterLink("Entries", EntryView.class);
             RouterLink drawerPasscode = new RouterLink("Passcodes", PasscodesView.class);
-            styleDrawerNav(drawerGenerator, drawerWinner, drawerEntry, drawerPasscode);
-            drawerNav.add(drawerGenerator, drawerWinner, drawerEntry, drawerPasscode, getDrawerLogoutButton(authContext));
+            RouterLink drawerManual = new RouterLink("Manual Entry", ManualEntryView.class);
+            styleDrawerNav(drawerGenerator, drawerWinner, drawerEntry, drawerPasscode, drawerManual);
+            drawerNav.add(drawerGenerator, drawerWinner, drawerEntry, drawerPasscode, drawerManual, getDrawerLogoutButton(authContext));
             header.getStyle().set("max-height", "3.6rem");
             header.add(desktopNav, toggle);
         } else {
